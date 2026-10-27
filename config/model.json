@@ -1,0 +1,44 @@
+{
+  "provider": "openai-compatible",
+  "baseUrl": "https://api.deepseek.com/v1",
+  "apiKey": "",
+  "model": "deepseek-chat",
+  "visionModel": "",
+  "temperature": 1.15,
+  "maxTokens": 2048,
+  "timeoutMs": 120000,
+  "stream": true,
+  "retry": {
+    "times": 2,
+    "baseDelayMs": 800
+  },
+  "roles": {
+    "chat": {},
+    "decision": {
+      "temperature": 0.2,
+      "maxTokens": 512,
+      "stream": false
+    },
+    "judge": {
+      "temperature": 0.2,
+      "maxTokens": 512,
+      "stream": false
+    },
+    "memory": {
+      "temperature": 0.3,
+      "maxTokens": 900,
+      "stream": false
+    },
+    "agent": {
+      "temperature": 0.7,
+      "maxTokens": 8192,
+      "stream": false
+    }
+  },
+  "balance": {
+    "enabled": true,
+    "url": "https://api.deepseek.com/user/balance",
+    "currency": "CNY"
+  },
+  "offline": false
+}

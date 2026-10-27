@@ -1,0 +1,17 @@
+{
+  "llm.client.imageTooLarge": "图片过大（{mb}MB），无法送进模型",
+  "llm.client.onDeltaError": "onDelta 回调异常",
+  "llm.client.unknown": "未知",
+  "llm.client.toolArgsIncomplete": "工具调用参数不完整：工具 {name}，finish_reason={finishReason}，arguments 长度 {length}，开头 200 字符：{head}",
+  "llm.client.toolArgsIncompleteTruncated": "工具调用参数不完整：工具 {name}，finish_reason={finishReason}，arguments 长度 {length}（JSON 解析失败，多半被截断），开头 200 字符：{head}",
+  "llm.client.offline": "模型接口处于离线模式（model.offline=true）",
+  "llm.client.noApiKey": "未配置模型 API Key，调用可能失败（config/model.json 的 apiKey 或 .env 的 MODEL_API_KEY）",
+  "llm.client.httpError": "模型接口返回 {status}：{body}",
+  "llm.client.callFailedWithCause": "模型接口调用失败：{message}",
+  "llm.client.timeout": "模型接口调用超时",
+  "llm.client.retry": "模型调用失败（第 {attempt} 次），准备重试：{message}",
+  "llm.client.callFailed": "模型接口调用失败",
+  "llm.client.noVisionModel": "没有能看图的模型：主模型与 visionModel 都是空的",
+  "llm.client.defaultVisionPrompt": "看看这张图，说说你看到什么",
+  "llm.client.balanceFailed": "查询余额失败"
+}

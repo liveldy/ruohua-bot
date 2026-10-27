@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "dir": "stickers",
+  "indexFile": "data/stickers/index.json",
+  "learnFromAdmins": true,
+  "learnFromOthers": false,
+  "autoMeaning": true,
+  "sendChance": 0.16,
+  "cooldownMs": 120000,
+  "standalone": true,
+  "maxItems": 500,
+  "maxFileBytes": 2097152,
+  "downloadTimeoutMs": 5000,
+  "tags": [],
+  "allowedRoots": []
+}

@@ -1,0 +1,4 @@
+{
+  "app.logger.operation": "操作 {action}",
+  "app.logger.operationFailed": "操作 {action}（失败）"
+}

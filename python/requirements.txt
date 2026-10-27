@@ -1,0 +1,18 @@
+# 若华 · 感知侧车（python/sidecar.py）的可选依赖
+#
+# 侧车本身只用标准库，不装这里的任何东西也能正常启动：
+# /health、/embed、/similar、/score、/consolidate、/screenshot 全都可用。
+# 下面三条都是「可选」的，装了才解锁对应能力，没装时接口会老实返回
+# {"ok": false, "error": "asr_unsupported" / "ocr_unsupported"}。
+#
+# 安装：python -m pip install -r python/requirements.txt
+# 只装其中一个也行，例如：python -m pip install faster-whisper
+
+# --- 可选：语音识别，解锁 POST /asr ---
+faster-whisper>=1.0.0
+
+# --- 可选：OCR（后端之一），解锁 POST /ocr ---
+# 除了这个后端，Windows 上还有系统自带的 Windows.Media.Ocr，不需要装任何东西。
+# 用 pytesseract 的话，系统里还得单独装 tesseract 可执行文件。
+pytesseract>=0.3.10
+Pillow>=10.0.0

@@ -1,0 +1,12 @@
+node_modules/
+.env
+data/
+logs/
+work/
+reports/
+stickers/*
+!stickers/README.md
+*.log
+__pycache__/
+*.pyc
+.tmp/

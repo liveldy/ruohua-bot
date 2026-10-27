@@ -1,0 +1,44 @@
+{
+  "enabled": true,
+  "perUser": true,
+  "temporary": {
+    "capacity": 400,
+    "halfLifeHours": 72,
+    "minScore": 0.12,
+    "promoteAfterAccess": 4,
+    "maxAgeDays": 60
+  },
+  "permanent": {
+    "capacity": 200,
+    "minImportance": 0.75,
+    "keywordMinImportance": 0.5,
+    "keywords": ["第一次", "答应", "约定", "生日", "喜欢", "讨厌", "永远", "记住", "重要", "秘密", "纪念"],
+    "neverForget": true
+  },
+  "recall": {
+    "topK": 12,
+    "weights": {
+      "relevance": 0.5,
+      "recency": 0.3,
+      "importance": 0.2
+    },
+    "minScore": 0.15
+  },
+  "consolidate": {
+    "intervalMinutes": 30,
+    "batch": 60,
+    "mergeSimilarity": 0.92,
+    "summaryMaxChars": 120
+  },
+  "extract": {
+    "enabled": true,
+    "maxItemsPerTurn": 3,
+    "minChars": 6
+  },
+  "_notes": [
+    "JSON 不支持注释，逐条说明集中放在这里（装载时是 JSON.parse，未识别的键会被忽略，不会影响别的模块）。",
+    "permanent.minImportance = 0.75：importance 到这个数就够「刻骨铭心」，不需要别的理由，直接进永久。",
+    "permanent.keywordMinImportance = 0.5（= minImportance 的 2/3）：光是命中关键词或提炼方显式要求已经不够 —— 还得 importance 到这里。真机上一轮跑出 13 条永久记忆，importance 只有 0.30~0.45 的那些（「喜欢」「答应」「第一次」撞词撞上的）就是被这个门槛放进来的，等于门槛形同虚设。",
+    "临时记忆升永久（consolidate 的晋升）走同一把尺子：先够 promoteAfterAccess 次被想起，再过 classifyKind 那道关。"
+  ]
+}

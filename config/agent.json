@@ -1,0 +1,17 @@
+{
+  "enabled": true,
+  "maxSteps": 24,
+  "workMaxSteps": 8,
+  "chatTools": true,
+  "chatMaxSteps": 3,
+  "maxConcurrent": 3,
+  "stepTimeoutMs": 120000,
+  "taskTimeoutMs": 900000,
+  "allowParallelTools": false,
+  "reportProgress": true,
+  "progressEverySteps": 6,
+  "interruptible": true,
+  "resultAsFileThreshold": 800,
+  "toolResultMaxChars": 4000,
+  "systemNote": "你是若华在干活时的样子：先想清楚再做，一步一步来，每步都用工具真的去执行，不要凭空编造结果。"
+}

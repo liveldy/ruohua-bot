@@ -1,0 +1,31 @@
+{
+  "enabled": true,
+  "scheduler": {
+    "enabled": true,
+    "tickSeconds": 20,
+    "maxTasks": 200
+  },
+  "idle": {
+    "enabled": true,
+    "checkIntervalSeconds": 60,
+    "idleAfterMinutes": 45,
+    "cooldownMinutes": 25,
+    "maxPerDay": 12,
+    "activities": ["recall", "observe", "learn", "write", "play"],
+    "activityWeights": {
+      "recall": 3,
+      "observe": 2,
+      "learn": 2,
+      "write": 1,
+      "play": 1
+    }
+  },
+  "proactive": {
+    "enabled": true,
+    "targets": [],
+    "minIntervalMinutes": 90,
+    "maxPerDay": 8,
+    "quietHours": ["23:30", "07:30"],
+    "resumeGreeting": true
+  }
+}

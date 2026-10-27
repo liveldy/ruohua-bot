@@ -1,0 +1,16 @@
+{
+  "sidecar.cli.description": "若华 · 本地感知侧车（仅标准库）",
+  "sidecar.cli.dataDirHelp": "数据目录（截图默认落在这里）",
+  "sidecar.cli.selftestHelp": "跑一遍自检后退出",
+  "sidecar.server.started": "{service} {version} 已启动：http://{host}:{port}（数据目录 {dataDir}）",
+  "sidecar.server.features": "能力：",
+  "sidecar.server.interrupted": "收到中断，退出。",
+  "sidecar.index.body": "若华 · 本地感知侧车（{service} {version}）\n\nGET  /health                          健康状况与可用能力\nPOST /embed      {texts:[...]}        字符 n-gram 哈希向量（{dim} 维，L2 归一化）\nPOST /similar    {a,b}                两段文本余弦相似度\nPOST /score      {items:[...],now}    记忆强度（importance × 衰减 × access）\nPOST /consolidate{items,thresholds}   巩固建议 keep / promote / drop / merge\nGET  /screenshot?path=<p>&monitor=0   Windows 截屏，存为 BMP\nPOST /asr        {path}               语音转文字（需 faster-whisper，可选）\nPOST /ocr        {path}               图片文字识别（pytesseract 或 Windows.Media.Ocr，可选）\n\n数据目录：{dataDir}\n可选依赖：见 python/requirements.txt（不装也能跑，对应接口返回 *_unsupported）\n",
+  "sidecar.screenshot.noSize": "powershell 没有返回尺寸：{output}",
+  "sidecar.screenshot.emptyResult": "{method}: 结果为空（size={size}）",
+  "sidecar.asr.missingDependency": "未安装 faster-whisper（可选依赖）",
+  "sidecar.ocr.noBackend": "没有可用的 OCR 后端（pytesseract / Windows.Media.Ocr）",
+  "sidecar.selftest.embed": "embed: {dim} 维，示例相似度 {score}",
+  "sidecar.selftest.screenSkipped": "截屏：非 Windows 平台，跳过",
+  "sidecar.selftest.screen": "截屏："
+}

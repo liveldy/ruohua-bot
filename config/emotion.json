@@ -1,0 +1,60 @@
+{
+  "enabled": true,
+  "defaultMood": "平静",
+  "moods": ["平静", "开心", "生气", "委屈", "疲惫", "关心"],
+  "initialAffection": {
+    "owner": 60,
+    "member": 15
+  },
+  "affectionRange": [0, 100],
+  "deltas": {
+    "praise": 3,
+    "thanks": 2,
+    "share": 1.5,
+    "chat": 0.2,
+    "helpful": 1,
+    "ignore": -1.5,
+    "command": -0.3,
+    "insult": -6,
+    "harass": -4,
+    "suspect": -3,
+    "apology": 2
+  },
+  "decay": {
+    "halfLifeHours": 168,
+    "toward": 40,
+    "minIntervalMinutes": 30
+  },
+  "mood": {
+    "decayMinutes": 90,
+    "moodDurationMinutes": {
+      "开心": 60,
+      "生气": 45,
+      "委屈": 60,
+      "疲惫": 120,
+      "关心": 30
+    },
+    "thresholds": {
+      "deltaToMood": {
+        "3": "开心",
+        "-4": "生气",
+        "-2": "委屈"
+      }
+    }
+  },
+  "frequency": {
+    "平静": { "replyChance": 1, "frequencyMultiplier": 1, "segmentGapScale": 1 },
+    "开心": { "replyChance": 1, "frequencyMultiplier": 1.5, "segmentGapScale": 0.6 },
+    "生气": { "replyChance": 0.75, "frequencyMultiplier": 0.4, "segmentGapScale": 1.6 },
+    "委屈": { "replyChance": 0.85, "frequencyMultiplier": 0.6, "segmentGapScale": 1.4 },
+    "疲惫": { "replyChance": 0.7, "frequencyMultiplier": 0.5, "segmentGapScale": 1.8 },
+    "关心": { "replyChance": 1, "frequencyMultiplier": 1.2, "segmentGapScale": 0.9 }
+  },
+  "labels": [
+    { "min": 85, "label": "很亲近" },
+    { "min": 65, "label": "亲近" },
+    { "min": 45, "label": "熟悉" },
+    { "min": 25, "label": "认识" },
+    { "min": 0, "label": "生疏" }
+  ]
+}

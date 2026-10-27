@@ -1,0 +1,7 @@
+{
+  "common.time.days": "{days}天",
+  "common.time.hours": "{hours}小时",
+  "common.time.minutes": "{minutes}分钟",
+  "common.time.seconds": "{seconds}秒",
+  "common.time.weekdays": "日一二三四五六"
+}

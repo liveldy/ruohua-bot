@@ -1,0 +1,24 @@
+{
+  "name": "ruohua-bot",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "若华 —— 基于 NapCat/OneBot 11 的陪伴型与工作型 QQ AI 机器人",
+  "engines": {
+    "node": ">=20.11"
+  },
+  "scripts": {
+    "start": "node src/main.js",
+    "dev": "node src/main.js --log-level debug",
+    "test": "node --test \"tests/**/*.test.js\"",
+    "mock:onebot": "node tools/dev/mock-onebot.js",
+    "mock:llm": "node tools/dev/mock-llm.js",
+    "sidecar": "python python/sidecar.py --port 8765",
+    "i18n": "node tools/dev/check-i18n.mjs",
+    "encoding": "node tools/dev/check-encoding.mjs",
+    "e2e": "node --test \"tests/e2e/*.test.js\""
+  },
+  "dependencies": {
+    "ws": "^8.22.0"
+  }
+}

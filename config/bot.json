@@ -1,0 +1,46 @@
+{
+  "name": "若华",
+  "version": "0.1.0",
+  "logLevel": "info",
+  "dataDir": "data",
+  "onebot": {
+    "mode": "forward",
+    "wsUrl": "ws://127.0.0.1:3001",
+    "accessToken": "",
+    "reversePort": 3002,
+    "reversePath": "/onebot",
+    "httpUrl": "http://127.0.0.1:3000",
+    "httpPort": 3003,
+    "heartbeatTimeoutMs": 90000,
+    "reconnect": {
+      "minDelayMs": 1000,
+      "maxDelayMs": 30000,
+      "factor": 1.8
+    },
+    "requestTimeoutMs": 10000,
+    "selfId": 0
+  },
+  "behavior": {
+    "privateAutoReply": true,
+    "groupRequireAt": true,
+    "groupWhitelist": [],
+    "privateWhitelist": [],
+    "blacklist": [],
+    "replyDebounceMs": 300,
+    "cooldownMs": 0,
+    "maxConcurrentReplies": 4,
+    "typingDelayPerCharMs": 55,
+    "typingDelayMaxMs": 3500,
+    "ignoreSelf": true,
+    "replyToUnknownPrivate": true
+  },
+  "context": {
+    "recentMessages": 20,
+    "maxChars": 6000,
+    "persist": true
+  },
+  "greeting": {
+    "enabled": true,
+    "text": "若华已上线，随时待命。"
+  }
+}

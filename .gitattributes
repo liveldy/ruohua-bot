@@ -1,0 +1,4 @@
+# 行尾按项目基线落进仓库：文本文件 LF，批处理 CRLF。
+# 仓库里存的是规范化后的内容，克隆方不必依赖各自的 core.autocrlf。
+* text=auto eol=lf
+*.bat text eol=crlf

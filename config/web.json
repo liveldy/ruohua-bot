@@ -1,0 +1,14 @@
+{
+  "enabled": true,
+  "host": "127.0.0.1",
+  "port": 8787,
+  "token": "",
+  "allowRemote": false,
+  "openBrowser": false,
+  "napcat": {
+    "dir": "D:/Desktop/NapCat/NapCat.52230.Shell",
+    "launcher": "napcat.bat",
+    "webuiUrl": "http://127.0.0.1:6099",
+    "onebotPort": 3001
+  }
+}

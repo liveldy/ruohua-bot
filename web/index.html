@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title data-i18n="webui.app.title"></title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231a73e8'/%3E%3Ctext x='16' y='22' font-size='16' text-anchor='middle' fill='white' font-family='sans-serif'%3E%E8%8B%A5%3C/text%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <!-- ——————————————— 顶栏 ——————————————— -->
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-text">
+          <strong data-i18n="webui.app.brand"></strong>
+          <span class="brand-sub" data-i18n="webui.app.brandSub"></span>
+        </span>
+      </div>
+
+      <nav class="tabs" role="tablist" data-i18n-attr="aria-label:webui.tab.listLabel">
+        <button class="tab" type="button" role="tab" data-page="home" aria-selected="true" aria-controls="page-home" data-i18n="webui.tab.home"></button>
+        <button class="tab" type="button" role="tab" data-page="config" aria-selected="false" aria-controls="page-config" data-i18n="webui.tab.config"></button>
+        <button class="tab" type="button" role="tab" data-page="env" aria-selected="false" aria-controls="page-env" data-i18n="webui.tab.env"></button>
+        <button class="tab" type="button" role="tab" data-page="i18n" aria-selected="false" aria-controls="page-i18n" data-i18n="webui.tab.i18n"></button>
+        <button class="tab" type="button" role="tab" data-page="stickers" aria-selected="false" aria-controls="page-stickers" data-i18n="webui.tab.stickers"></button>
+        <button class="tab" type="button" role="tab" data-page="monitor" aria-selected="false" aria-controls="page-monitor" data-i18n="webui.tab.monitor"></button>
+        <button class="tab" type="button" role="tab" data-page="debug" aria-selected="false" aria-controls="page-debug" data-i18n="webui.tab.debug"></button>
+      </nav>
+
+      <div class="topbar-actions">
+        <span class="conn-dot" id="connDot" data-state="offline" data-i18n-attr="title:webui.top.conn.offline"></span>
+        <button class="btn btn-ghost" type="button" id="tokenBtn" aria-expanded="false" aria-controls="tokenPanel" data-i18n="webui.top.token"></button>
+        <button class="btn btn-ghost" type="button" id="themeBtn" data-i18n-attr="title:webui.top.themeTitle" data-i18n="webui.top.theme"></button>
+      </div>
+
+      <div class="popover" id="tokenPanel" hidden>
+        <label class="field">
+          <span class="field-label" data-i18n="webui.top.tokenLabel"></span>
+          <input class="input" type="password" id="tokenInput" autocomplete="off" data-i18n-attr="placeholder:webui.top.tokenPlaceholder" />
+        </label>
+        <p class="hint" data-i18n="webui.top.tokenHint"></p>
+        <div class="popover-actions">
+          <button class="btn btn-primary" type="button" id="tokenSave" data-i18n="webui.action.save"></button>
+          <button class="btn" type="button" id="tokenClear" data-i18n="webui.action.clearToken"></button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ——————————————— 状态条 ——————————————— -->
+    <section class="statusbar" id="statusBar" data-i18n-attr="aria-label:webui.status.label">
+      <button class="chip" type="button" data-chip="web" aria-expanded="false">
+        <span class="chip-label" data-i18n="webui.status.web"></span>
+        <span class="chip-value" data-chip-value="web"></span>
+      </button>
+      <button class="chip" type="button" data-chip="uptime" aria-expanded="false">
+        <span class="chip-label" data-i18n="webui.status.uptime"></span>
+        <span class="chip-value" data-chip-value="uptime"></span>
+      </button>
+      <button class="chip" type="button" data-chip="onebot" aria-expanded="false">
+        <span class="chip-label" data-i18n="webui.status.onebot"></span>
+        <span class="chip-value" data-chip-value="onebot"></span>
+      </button>
+      <button class="chip" type="button" data-chip="llm" aria-expanded="false">
+        <span class="chip-label" data-i18n="webui.status.llm"></span>
+        <span class="chip-value" data-chip-value="llm"></span>
+      </button>
+      <button class="chip" type="button" data-chip="balance" aria-expanded="false">
+        <span class="chip-label" data-i18n="webui.status.balance"></span>
+        <span class="chip-value" data-chip-value="balance"></span>
+      </button>
+      <button class="chip" type="button" data-chip="memory" aria-expanded="false">
+        <span class="chip-label" data-i18n="webui.status.memory"></span>
+        <span class="chip-value" data-chip-value="memory"></span>
+      </button>
+      <button class="chip" type="button" data-chip="emotion" aria-expanded="false">
+        <span class="chip-label" data-i18n="webui.status.emotion"></span>
+        <span class="chip-value" data-chip-value="emotion"></span>
+      </button>
+      <button class="chip" type="button" data-chip="tasks" aria-expanded="false">
+        <span class="chip-label" data-i18n="webui.status.tasks"></span>
+        <span class="chip-value" data-chip-value="tasks"></span>
+      </button>
+      <button class="chip" type="button" data-chip="sidecar" aria-expanded="false">
+        <span class="chip-label" data-i18n="webui.status.sidecar"></span>
+        <span class="chip-value" data-chip-value="sidecar"></span>
+      </button>
+      <span class="status-note" id="statusNote"></span>
+      <span class="status-note hint-strong" id="standaloneHint" hidden data-i18n="webui.status.standaloneClick"></span>
+    </section>
+
+    <!-- 别的端口上跑着的面板 -->
+    <div class="peers" id="peersHint" hidden>
+      <div class="peers-body">
+        <p class="peers-text" id="peersText"></p>
+        <a class="peers-link" id="peersLink" href="#" target="_blank" rel="noreferrer noopener" data-i18n="webui.peers.go"></a>
+      </div>
+      <button class="btn btn-ghost" type="button" id="peersClose" data-i18n="webui.action.dismiss"></button>
+    </div>
+
+    <main class="layout">
+      <!-- ——————————————— ① 主页面 ——————————————— -->
+      <section class="page" id="page-home" role="tabpanel">
+        <div class="mode-banner" id="modeBanner" data-tone="loading">
+          <div class="mode-main">
+            <strong class="mode-title" id="modeTitle"></strong>
+            <p class="mode-desc" id="modeDesc"></p>
+          </div>
+          <div class="mode-actions">
+            <button class="btn btn-primary" type="button" id="modeStart" hidden data-i18n="webui.home.mode.start"></button>
+            <button class="btn" type="button" id="modeReload" data-i18n="webui.action.recheck"></button>
+          </div>
+        </div>
+
+        <section class="services-head">
+          <h2 data-i18n="webui.home.services.title"></h2>
+          <p class="hint" data-i18n="webui.home.services.desc"></p>
+        </section>
+        <div class="services" id="serviceGrid">
+          <p class="empty" data-i18n="webui.state.loading"></p>
+        </div>
+      </section>
+
+      <!-- ——————————————— ② 配置 ——————————————— -->
+      <section class="page" id="page-config" role="tabpanel" hidden>
+        <div class="split">
+          <aside class="card side-card">
+            <header class="card-head">
+              <h2 data-i18n="webui.config.files"></h2>
+              <button class="btn btn-ghost" type="button" id="configReload" data-i18n="webui.action.refresh"></button>
+            </header>
+            <nav class="file-list" id="configList" data-i18n-attr="aria-label:webui.config.files">
+              <p class="empty" data-i18n="webui.state.loading"></p>
+            </nav>
+          </aside>
+
+          <section class="card editor-card">
+            <header class="card-head">
+              <div>
+                <h2 id="configTitle"></h2>
+                <p class="hint" id="configMeta"></p>
+              </div>
+              <div class="card-actions">
+                <span class="changed-badge" id="configChanged" hidden></span>
+                <button class="btn btn-ghost" type="button" id="configFormat" hidden data-i18n="webui.action.format"></button>
+                <button class="btn btn-ghost" type="button" id="configJson" aria-pressed="false" data-i18n="webui.config.toJson"></button>
+                <button class="btn btn-ghost" type="button" id="configRevert" disabled data-i18n="webui.action.revert"></button>
+                <button class="btn btn-primary" type="button" id="configSave" disabled data-i18n="webui.action.save"></button>
+              </div>
+            </header>
+
+            <p class="banner banner-warn" id="configParseError" hidden></p>
+
+            <div class="form-body" id="configForm">
+              <p class="empty" data-i18n="webui.config.pickFile"></p>
+            </div>
+
+            <div class="editor" id="editorWrap" hidden>
+              <pre class="editor-backdrop" id="editorBackdrop" aria-hidden="true"></pre>
+              <textarea
+                class="editor-input"
+                id="editorInput"
+                spellcheck="false"
+                wrap="soft"
+                data-i18n-attr="aria-label:webui.config.editorLabel,placeholder:webui.config.editorPlaceholder"
+              ></textarea>
+            </div>
+
+            <footer class="card-foot">
+              <span class="save-state" id="configState"></span>
+              <span class="hint" id="configBackup"></span>
+            </footer>
+          </section>
+        </div>
+      </section>
+
+      <!-- ——————————————— ③ 环境变量 ——————————————— -->
+      <section class="page" id="page-env" role="tabpanel" hidden>
+        <section class="card">
+          <header class="card-head">
+            <div>
+              <h2 data-i18n="webui.env.title"></h2>
+              <p class="hint" id="envMeta"></p>
+            </div>
+            <div class="card-actions">
+              <span class="changed-badge" id="envChanged" hidden></span>
+              <button class="btn btn-ghost" type="button" id="envText" aria-pressed="false" data-i18n="webui.env.toText"></button>
+              <button class="btn btn-ghost" type="button" id="envRevert" disabled data-i18n="webui.action.revert"></button>
+              <button class="btn btn-primary" type="button" id="envSave" disabled data-i18n="webui.action.save"></button>
+            </div>
+          </header>
+
+          <div class="form-body" id="envForm">
+            <p class="empty" data-i18n="webui.state.loading"></p>
+          </div>
+
+          <div class="text-mode" id="envTextWrap" hidden>
+            <textarea class="input code" id="envTextArea" rows="16" spellcheck="false" data-i18n-attr="aria-label:webui.env.textLabel"></textarea>
+            <p class="hint" data-i18n="webui.env.textHint"></p>
+            <p class="note-line" id="envUnknown" hidden></p>
+          </div>
+
+          <footer class="card-foot">
+            <span class="save-state" id="envState"></span>
+            <span class="hint" id="envBackup"></span>
+          </footer>
+        </section>
+      </section>
+
+      <!-- ——————————————— ④ 本地化键 ——————————————— -->
+      <section class="page" id="page-i18n" role="tabpanel" hidden>
+        <section class="card">
+          <header class="card-head">
+            <div>
+              <h2 data-i18n="webui.i18n.title"></h2>
+              <p class="hint" id="i18nMeta"></p>
+            </div>
+            <div class="card-actions">
+              <span class="changed-badge" id="i18nChanged" hidden></span>
+              <button class="btn btn-ghost" type="button" id="i18nReload" data-i18n="webui.action.refresh"></button>
+              <button class="btn btn-ghost" type="button" id="i18nResetAll" data-i18n="webui.i18n.resetAll"></button>
+              <button class="btn btn-primary" type="button" id="i18nSave" data-i18n="webui.action.save"></button>
+            </div>
+          </header>
+
+          <div class="toolbar">
+            <label class="inline-field inline-grow">
+              <span data-i18n="webui.i18n.search"></span>
+              <input class="input" type="search" id="i18nSearch" data-i18n-attr="placeholder:webui.i18n.searchHint" />
+            </label>
+            <label class="switch">
+              <input type="checkbox" id="i18nOnlyChanged" />
+              <span data-i18n="webui.i18n.onlyChanged"></span>
+            </label>
+            <span class="hint" id="i18nStat"></span>
+          </div>
+
+          <div class="i18n-list" id="i18nList">
+            <p class="empty" data-i18n="webui.state.loading"></p>
+          </div>
+
+          <footer class="card-foot">
+            <span class="save-state" id="i18nState"></span>
+            <span class="hint" id="i18nFile"></span>
+          </footer>
+        </section>
+      </section>
+
+      <!-- ——————————————— ⑤ 表情包 ——————————————— -->
+      <section class="page" id="page-stickers" role="tabpanel" hidden>
+        <section class="card">
+          <header class="card-head">
+            <div>
+              <h2 data-i18n="webui.stickers.title"></h2>
+              <p class="hint" data-i18n="webui.stickers.desc"></p>
+            </div>
+            <div class="card-actions">
+              <span class="save-state" id="stickerStat"></span>
+              <button class="btn btn-ghost" type="button" id="stickerReload" data-i18n="webui.action.refresh"></button>
+            </div>
+          </header>
+
+          <div class="toolbar">
+            <label class="inline-field inline-grow">
+              <span data-i18n="webui.stickers.search"></span>
+              <input class="input" type="search" id="stickerSearch" data-i18n-attr="placeholder:webui.stickers.searchPlaceholder" />
+            </label>
+            <label class="inline-field">
+              <span data-i18n="webui.stickers.tag"></span>
+              <select class="input" id="stickerTag"></select>
+            </label>
+            <span class="hint" id="stickerCount"></span>
+          </div>
+
+          <p class="banner" id="stickerNote" hidden></p>
+
+          <section class="sticker-detail" id="stickerDetail" hidden>
+            <div class="sticker-detail-media">
+              <img id="stickerDetailImage" alt="" />
+              <div class="sticker-fallback" id="stickerDetailFallback" hidden data-i18n="webui.stickers.imageFailed"></div>
+            </div>
+            <div class="sticker-detail-form">
+              <h3 data-i18n="webui.stickers.detailTitle"></h3>
+              <p class="hint" id="stickerDetailMeta"></p>
+              <label class="field">
+                <span class="field-label" data-i18n="webui.stickers.fieldTitle"></span>
+                <input class="input" id="stickerTitle" data-i18n-attr="placeholder:webui.stickers.fieldTitlePlaceholder" />
+              </label>
+              <label class="field">
+                <span class="field-label" data-i18n="webui.stickers.meaning"></span>
+                <input class="input" id="stickerMeaning" data-i18n-attr="placeholder:webui.stickers.meaningPlaceholder" />
+              </label>
+              <label class="field">
+                <span class="field-label" data-i18n="webui.stickers.tags"></span>
+                <input class="input" id="stickerTags" data-i18n-attr="placeholder:webui.stickers.tagsPlaceholder" />
+              </label>
+              <div class="card-actions">
+                <button class="btn btn-danger" type="button" id="stickerDelete" data-i18n="webui.stickers.delete"></button>
+                <button class="btn" type="button" id="stickerDescribe" data-i18n="webui.stickers.describe"></button>
+                <button class="btn btn-primary" type="button" id="stickerSave" data-i18n="webui.action.save"></button>
+                <button class="btn" type="button" id="stickerClose" data-i18n="webui.stickers.close"></button>
+              </div>
+            </div>
+          </section>
+
+          <div class="sticker-grid" id="stickerGrid">
+            <p class="empty" data-i18n="webui.state.loading"></p>
+          </div>
+
+          <div class="sticker-more" id="stickerMore" hidden>
+            <button class="btn" type="button" id="stickerMoreBtn"></button>
+          </div>
+
+          <details class="group" id="stickerNotesBox" hidden>
+            <summary>
+              <span class="group-name" data-i18n="webui.stickers.notesTitle"></span>
+              <span class="group-count" id="stickerNotesCount"></span>
+            </summary>
+            <div class="group-body" id="stickerNotes"></div>
+          </details>
+
+          <footer class="card-foot">
+            <span class="save-state" id="stickerState"></span>
+            <span class="hint" id="stickerHint"></span>
+          </footer>
+        </section>
+      </section>
+
+      <!-- ——————————————— ⑥ 监视终端 ——————————————— -->
+      <section class="page" id="page-monitor" role="tabpanel" hidden>
+        <section class="card log-card">
+          <header class="card-head log-head">
+            <h2 data-i18n="webui.log.title"></h2>
+            <div class="toolbar">
+              <label class="inline-field">
+                <span data-i18n="webui.log.level"></span>
+                <select class="input" id="logLevel">
+                  <option value="debug" data-i18n="webui.log.level.all"></option>
+                  <option value="info" selected data-i18n="webui.log.level.info"></option>
+                  <option value="warn" data-i18n="webui.log.level.warn"></option>
+                  <option value="error" data-i18n="webui.log.level.error"></option>
+                </select>
+              </label>
+              <label class="inline-field">
+                <span data-i18n="webui.log.channel"></span>
+                <select class="input" id="logChannel">
+                  <option value="all" data-i18n="webui.log.channel.all"></option>
+                  <option value="app" data-i18n="webui.log.channel.app"></option>
+                  <option value="conversation" data-i18n="webui.log.channel.conversation"></option>
+                  <option value="operation" data-i18n="webui.log.channel.operation"></option>
+                </select>
+              </label>
+              <label class="inline-field">
+                <span data-i18n="webui.log.keyword"></span>
+                <input class="input" type="search" id="logKeyword" data-i18n-attr="placeholder:webui.log.keywordHint" />
+              </label>
+              <button class="btn" type="button" id="logPause" data-i18n="webui.log.pause"></button>
+              <button class="btn" type="button" id="logClear" data-i18n="webui.action.clear"></button>
+              <label class="switch">
+                <input type="checkbox" id="logFollow" checked />
+                <span data-i18n="webui.log.follow"></span>
+              </label>
+            </div>
+          </header>
+
+          <p class="log-note" id="logNote"></p>
+          <div class="log-list" id="logList" role="log" aria-live="polite" aria-relevant="additions">
+            <p class="empty" data-i18n="webui.log.empty"></p>
+          </div>
+          <footer class="card-foot">
+            <span id="logCount"></span>
+            <span class="hint" data-i18n="webui.log.footHint"></span>
+          </footer>
+        </section>
+      </section>
+
+      <!-- ——————————————— ⑥ 实时调试 ——————————————— -->
+      <section class="page" id="page-debug" role="tabpanel" hidden>
+        <p class="banner" id="debugBanner" hidden></p>
+        <div class="split debug-split">
+          <section class="card form-card">
+            <header class="card-head">
+              <div>
+                <h2 data-i18n="webui.debug.title"></h2>
+                <p class="hint" id="debugHint" data-i18n="webui.debug.hint"></p>
+              </div>
+            </header>
+            <nav class="subtabs" role="tablist" data-i18n-attr="aria-label:webui.debug.tools">
+              <button class="subtab" type="button" role="tab" data-tool="message" aria-selected="true" data-i18n="webui.debug.tool.message"></button>
+              <button class="subtab" type="button" role="tab" data-tool="llm" aria-selected="false" data-i18n="webui.debug.tool.llm"></button>
+              <button class="subtab" type="button" role="tab" data-tool="tool" aria-selected="false" data-i18n="webui.debug.tool.tool"></button>
+              <button class="subtab" type="button" role="tab" data-tool="sidecar" aria-selected="false" data-i18n="webui.debug.tool.sidecar"></button>
+            </nav>
+
+            <!-- 模拟消息 -->
+            <form class="tool-form" data-tool="message" id="formMessage">
+              <div class="grid-2">
+                <label class="field">
+                  <span class="field-label" data-i18n="webui.debug.message.scene"></span>
+                  <select class="input" id="msgScene">
+                    <option value="private" data-i18n="webui.debug.message.scene.private"></option>
+                    <option value="group" data-i18n="webui.debug.message.scene.group"></option>
+                  </select>
+                </label>
+                <label class="field">
+                  <span class="field-label" data-i18n="webui.debug.message.userId"></span>
+                  <input class="input" id="msgUserId" inputmode="numeric" value="10001" />
+                </label>
+                <label class="field">
+                  <span class="field-label" data-i18n="webui.debug.message.nickname"></span>
+                  <input class="input" id="msgNickname" value="tester" />
+                </label>
+                <label class="field" id="msgGroupField" hidden>
+                  <span class="field-label" data-i18n="webui.debug.message.groupId"></span>
+                  <input class="input" id="msgGroupId" inputmode="numeric" value="100001" />
+                </label>
+              </div>
+              <label class="field">
+                <span class="field-label" data-i18n="webui.debug.message.text"></span>
+                <textarea class="input" id="msgText" rows="3" data-i18n-attr="placeholder:webui.debug.message.textHint"></textarea>
+              </label>
+              <label class="field">
+                <span class="field-label" data-i18n="webui.debug.message.images"></span>
+                <input class="input" id="msgImages" />
+              </label>
+              <div class="checkbox-row">
+                <label class="switch"><input type="checkbox" id="msgAt" checked /><span data-i18n="webui.debug.message.at"></span></label>
+                <label class="switch"><input type="checkbox" id="msgDryRun" /><span data-i18n="webui.debug.message.dryRun"></span></label>
+              </div>
+            </form>
+
+            <!-- 模型直调 -->
+            <form class="tool-form" data-tool="llm" id="formLlm" hidden>
+              <div class="grid-2">
+                <label class="field">
+                  <span class="field-label" data-i18n="webui.debug.llm.role"></span>
+                  <select class="input" id="llmRole">
+                    <option value="chat">chat</option>
+                    <option value="decision">decision</option>
+                    <option value="judge">judge</option>
+                    <option value="memory">memory</option>
+                    <option value="agent">agent</option>
+                  </select>
+                </label>
+                <label class="field">
+                  <span class="field-label" data-i18n="webui.debug.llm.model"></span>
+                  <input class="input" id="llmModel" placeholder="deepseek-chat" />
+                </label>
+                <label class="field">
+                  <span class="field-label" data-i18n="webui.debug.llm.maxTokens"></span>
+                  <input class="input" id="llmMaxTokens" inputmode="numeric" />
+                </label>
+                <label class="field">
+                  <span class="field-label" data-i18n="webui.debug.llm.temperature"></span>
+                  <input class="input" id="llmTemperature" inputmode="decimal" />
+                </label>
+              </div>
+              <label class="switch"><input type="checkbox" id="llmJson" /><span data-i18n="webui.debug.llm.json"></span></label>
+              <label class="field">
+                <span class="field-label" data-i18n="webui.debug.llm.prompt"></span>
+                <textarea class="input" id="llmPrompt" rows="5" data-i18n-attr="placeholder:webui.debug.llm.promptHint"></textarea>
+              </label>
+              <details class="advanced">
+                <summary data-i18n="webui.debug.llm.messages"></summary>
+                <textarea class="input code" id="llmMessages" rows="6" placeholder='[{"role":"user","content":"hi"}]'></textarea>
+                <p class="hint" data-i18n="webui.debug.llm.messagesHint"></p>
+              </details>
+            </form>
+
+            <!-- 工具直调 -->
+            <form class="tool-form" data-tool="tool" id="formTool" hidden>
+              <label class="field">
+                <span class="field-label" data-i18n="webui.debug.toolLabel"></span>
+                <select class="input" id="toolName">
+                  <option value=""></option>
+                </select>
+              </label>
+              <p class="hint" id="toolDesc"></p>
+              <label class="field">
+                <span class="field-label" data-i18n="webui.debug.args"></span>
+                <textarea class="input code" id="toolArgs" rows="6" placeholder='{ "path": "README.md" }'>{}</textarea>
+              </label>
+            </form>
+
+            <!-- 侧车直调 -->
+            <form class="tool-form" data-tool="sidecar" id="formSidecar" hidden>
+              <label class="field">
+                <span class="field-label" data-i18n="webui.debug.sidecar.method"></span>
+                <select class="input" id="sidecarMethod">
+                  <option value="health">health</option>
+                  <option value="probe">probe</option>
+                  <option value="embed">embed</option>
+                  <option value="similar">similar</option>
+                  <option value="screenshot">screenshot</option>
+                  <option value="asr">asr</option>
+                  <option value="score">score</option>
+                  <option value="consolidate">consolidate</option>
+                </select>
+              </label>
+              <label class="field">
+                <span class="field-label" data-i18n="webui.debug.sidecar.params"></span>
+                <textarea class="input code" id="sidecarArgs" rows="6" placeholder='{ "texts": ["hi"] }'>{}</textarea>
+              </label>
+            </form>
+
+            <footer class="card-foot form-foot">
+              <button class="btn btn-primary" type="button" data-action="run" data-i18n="webui.action.run"></button>
+              <span class="hint" id="runState"></span>
+            </footer>
+          </section>
+
+          <section class="card result-card">
+            <header class="card-head">
+              <h2 data-i18n="webui.debug.result"></h2>
+              <div class="card-actions">
+                <button class="btn btn-ghost" type="button" data-action="copy" data-i18n="webui.action.copyResult"></button>
+                <button class="btn btn-ghost" type="button" data-action="clear" data-i18n="webui.action.clear"></button>
+              </div>
+            </header>
+            <div class="result-body" id="resultBody">
+              <p class="empty" data-i18n="webui.debug.resultEmpty"></p>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+
+    <script src="./components.js" defer></script>
+    <script src="./app.js" defer></script>
+  </body>
+</html>

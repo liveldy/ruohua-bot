@@ -1,0 +1,23 @@
+{
+  "config.error.header": "配置有问题（{root}）：\n- {list}",
+  "config.problem.parse": "config/{name}.json 解析失败：{message}",
+  "config.validate.baseUrl": "model.baseUrl 为空：请在 config/model.json 或 .env 的 MODEL_BASE_URL 里填写模型接口地址",
+  "config.validate.model": "model.model 为空：请填写模型名（如 deepseek-chat）",
+  "config.validate.admins": "security.admins 为空：请在 config/security.json 的 admins 或 .env 的 ADMIN_QQ 里填上管理员 QQ 号",
+  "config.validate.onebotMode": "bot.onebot.mode 只能是 forward / reverse / http，现在是「{mode}」",
+  "config.validate.wsUrl": "bot.onebot.wsUrl 不是合法的 ws 地址：「{url}」",
+  "config.validate.passphrase": "security.passphrase.pool 为空：启用口令验证时必须给出口令池",
+  "config.validate.webPort": "web.port 不是合法端口：「{port}」",
+  "config.validate.webPortClash": "web.port {port} 和协议端 / 侧车占用的端口撞了，换一个（默认 8787）",
+  "config.default.botName": "若华",
+  "config.default.greeting": "若华已上线，随时待命。",
+  "config.default.personaName": "若华",
+  "config.default.basePrompt": "你是若华。说话短，有温度，像一个真实的人。",
+  "config.default.mood.calm": "平静",
+  "config.default.mood.happy": "开心",
+  "config.default.mood.angry": "生气",
+  "config.default.mood.wronged": "委屈",
+  "config.default.mood.tired": "疲惫",
+  "config.default.mood.caring": "关心",
+  "config.default.label.stranger": "生疏"
+}

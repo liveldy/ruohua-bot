@@ -1,0 +1,8 @@
+{
+  "i18n.error.emptyKey": "本地化键不能为空",
+  "i18n.error.noOverrideFile": "没有指定覆盖文件，无法保存",
+  "i18n.error.invalidJson": "本地化文件不是合法 JSON：{file}（{message}）",
+  "i18n.problem.notString": "{file}：键 {key} 不是字符串",
+  "i18n.problem.namespace": "{file}：键 {key} 应该以「{namespace}.」开头",
+  "i18n.problem.duplicate": "{file}：键 {key} 重复定义"
+}
